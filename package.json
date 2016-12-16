@@ -1,0 +1,16 @@
+{
+  "name": "monotron",
+  "version": "1.0.0",
+  "description": "monotron emulater",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Saphier",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  }
+}
