@@ -1,0 +1,11 @@
+*** User Interface ***
+~ 5 knobs
+  - VCO pitch
+  - LFO rate
+  - LFO int
+  - VCF cutoff
+  - VCF peak
+~ 1 switch
+  - LFO dest
+    ~ pitch
+    ~ cutoff

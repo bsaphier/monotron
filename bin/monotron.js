@@ -1,11 +1,11 @@
-export default class Monotron {
+export default class MonotronConstructor {
 
   constructor (audioContext) {
     this.audioContext = audioContext;
 
-    this.vco = audioContext.createOscillator();
-    this.lfo = audioContext.createOscillator();
     this.lfoGain = audioContext.createGain();
+    this.lfo = audioContext.createOscillator();
+    this.vco = audioContext.createOscillator();
     this.vcf = audioContext.createBiquadFilter(); // I'm going to want to design/create a different filter
     this.output = audioContext.createGain();
 
