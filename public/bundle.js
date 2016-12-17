@@ -21514,10 +21514,18 @@
 	    var _this = _possibleConstructorReturn(this, (AppContainer.__proto__ || Object.getPrototypeOf(AppContainer)).call(this, props));
 	
 	    _this.state = _initialState2.default;
+	    _this.audioContext = _this.audioContext.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(AppContainer, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps() {
+	      var canvas = this.refs.canvas;
+	      canvas.nx = 'keyboard';
+	      console.log(canvas.nx);
+	    }
+	  }, {
 	    key: 'audioContext',
 	    value: function audioContext(options) {
 	      return (0, _audio2.default)(options);
@@ -21528,6 +21536,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container-fluid' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'text-center' },
+	          _react2.default.createElement('canvas', { ref: 'canvas' })
+	        ),
 	        _react2.default.createElement(_Monotron2.default, {
 	          audioContext: this.audioContext(),
 	          switchPos: 0 //*TODO*

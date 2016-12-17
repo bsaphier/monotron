@@ -10,6 +10,12 @@ export default class AppContainer extends Component {
   constructor (props) {
     super(props);
     this.state = initialState;
+    this.audioContext = this.audioContext.bind(this);
+  }
+  componentWillReceiveProps () {
+    const canvas = this.refs.canvas;
+    canvas.nx = 'keyboard';
+    console.log(canvas.nx);
   }
   audioContext (options) {
     return audioContext(options);
@@ -17,6 +23,9 @@ export default class AppContainer extends Component {
   render () {
     return (
       <div className="container-fluid">
+        <div className="text-center">
+          <canvas ref="canvas" />
+        </div>
         <Monotron
           audioContext={this.audioContext()}
           switchPos={0}     //*TODO*
