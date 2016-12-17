@@ -1,3 +1,4 @@
+'use strict';
 import React, { Component } from 'react';
 import initialState from '../initialState';
 
@@ -12,22 +13,15 @@ export default class AppContainer extends Component {
     this.state = initialState;
     this.audioContext = this.audioContext.bind(this);
   }
-  componentWillReceiveProps () {
-    const canvas = this.refs.canvas;
-    canvas.nx = 'keyboard';
-    console.log(canvas.nx);
-  }
-  audioContext (options) {
-    return audioContext(options)(); //audioContext(options)
+  audioContext (opts) {
+    return audioContext(opts);
   }
   render () {
+    const audioNode = this.audioContext();
     return (
       <div className="container-fluid">
-        <div className="text-center">
-          <canvas ref="canvas" />
-        </div>
         <Monotron
-          audioContext={this.audioContext} // this.audioContext()
+          audioContext={audioNode}
           switchPos={0}     //*TODO*
           keyNoteVal={0}    //*TODO*
           intKnobVal={0}    //*TODO*

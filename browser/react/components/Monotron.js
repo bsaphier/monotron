@@ -27,6 +27,27 @@ const Monotron = (props) => {
         <Keyboard instrument={monotron} />
       </div>
       */}
+
+          <div className="container">
+            <div className="row">
+              <div className="col-xs-4">
+                <canvas data-nx="dial" id="VCO pitch"></canvas>
+              </div>
+              <div className="col-xs-4">
+                <canvas data-nx="dial" id="LFO rate"></canvas>
+                <canvas data-nx="dial" id="LFO int"></canvas>
+              </div>
+              <div className="col-xs-4">
+                <canvas data-nx="dial" id="VCF cutoff"></canvas>
+                <canvas data-nx="dial" id="VCF peak"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <canvas data-nx="keyboard"></canvas>
+          </div>
+
     </div>
   );
 };

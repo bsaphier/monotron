@@ -60,7 +60,20 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	_reactDom2.default.render(_react2.default.createElement(_AppContainer2.default, null), document.getElementById('app'));
+	// 
+	// class CanvasComp extends React.Component {
+	//   render() {
+	//     return (
+	//       <canvas data-nx="keyboard"></canvas>
+	//     );
+	//   }
+	// }
+	
+	_reactDom2.default.render(_react2.default.createElement(
+	  'div',
+	  null,
+	  _react2.default.createElement(_AppContainer2.default, null)
+	), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21519,30 +21532,19 @@
 	  }
 	
 	  _createClass(AppContainer, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps() {
-	      var canvas = this.refs.canvas;
-	      canvas.nx = 'keyboard';
-	      console.log(canvas.nx);
-	    }
-	  }, {
 	    key: 'audioContext',
-	    value: function audioContext(options) {
-	      return (0, _audio2.default)(options);
+	    value: function audioContext(opts) {
+	      return (0, _audio2.default)(opts);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var audioNode = this.audioContext();
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container-fluid' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'text-center' },
-	          _react2.default.createElement('canvas', { ref: 'canvas' })
-	        ),
 	        _react2.default.createElement(_Monotron2.default, {
-	          audioContext: this.audioContext(),
+	          audioContext: audioNode,
 	          switchPos: 0 //*TODO*
 	          , keyNoteVal: 0 //*TODO*
 	          , intKnobVal: 0 //*TODO*
@@ -21635,6 +21637,36 @@
 	      'h3',
 	      null,
 	      'MONOTRON'
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'container' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-4' },
+	          _react2.default.createElement('canvas', { 'data-nx': 'dial', id: 'VCO pitch' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-4' },
+	          _react2.default.createElement('canvas', { 'data-nx': 'dial', id: 'LFO rate' }),
+	          _react2.default.createElement('canvas', { 'data-nx': 'dial', id: 'LFO int' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-4' },
+	          _react2.default.createElement('canvas', { 'data-nx': 'dial', id: 'VCF cutoff' }),
+	          _react2.default.createElement('canvas', { 'data-nx': 'dial', id: 'VCF peak' })
+	        )
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'text-center' },
+	      _react2.default.createElement('canvas', { 'data-nx': 'keyboard' })
 	    )
 	  );
 	};
