@@ -18,7 +18,7 @@ export default class AppContainer extends Component {
     console.log(canvas.nx);
   }
   audioContext (options) {
-    return audioContext(options);
+    return audioContext(options)(); //audioContext(options)
   }
   render () {
     return (
@@ -27,7 +27,7 @@ export default class AppContainer extends Component {
           <canvas ref="canvas" />
         </div>
         <Monotron
-          audioContext={this.audioContext()}
+          audioContext={this.audioContext} // this.audioContext()
           switchPos={0}     //*TODO*
           keyNoteVal={0}    //*TODO*
           intKnobVal={0}    //*TODO*
