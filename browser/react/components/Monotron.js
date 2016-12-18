@@ -1,17 +1,20 @@
 import React from 'react';
+import Knob from './Knob.js';
+import Keyboard from './Keyboard.js';
 import MonotronConstructor from '../../../bin/monotron';
-import { Knob, Switch, Keyboard } from '../components';
 
 const Monotron = (props) => {
 
-  const switchPos = props.switchPos;
-  const keyNoteVal = props.keyNoteVal;
-  const intKnobVal = props.intKnobVal;
-  const rateKnobVal = props.rateKnobVal;
-  const peakKnobVal = props.peakKnobVal;
-  const pitchKnobVal = props.pitchKnobVal;
-  const cutoffKnobVal = props.cutoffKnobVal;
+  // const switchPos = props.switchPos;
+  // const keyNoteVal = props.keyNoteVal;
+  // const intKnobVal = props.intKnobVal;
+  // const rateKnobVal = props.rateKnobVal;
+  // const peakKnobVal = props.peakKnobVal;
+  // const pitchKnobVal = props.pitchKnobVal;
+  // const cutoffKnobVal = props.cutoffKnobVal;
   const monotron = new MonotronConstructor(props.audioContext);
+  monotron.connect(props.masterGain);
+  console.log('****Monotron****', monotron);
 
   return (
     <div className="container">
@@ -36,21 +39,6 @@ const Monotron = (props) => {
         <Keyboard instrument={monotron} />
       </div>
     </div>
-          {/* <div className="col-xs-4">
-            <canvas data-nx="dial" id="VCO pitch"></canvas>
-          </div>
-          <div className="col-xs-4">
-            <canvas data-nx="dial" id="LFO rate"></canvas>
-            <canvas data-nx="dial" id="LFO int"></canvas>
-          </div>
-          <div className="col-xs-4">
-            <canvas data-nx="dial" id="VCF cutoff"></canvas>
-            <canvas data-nx="dial" id="VCF peak"></canvas>
-          </div>
-
-          <div className="text-center">
-            <canvas data-nx="keyboard"></canvas>
-          </div> */}
   );
 };
 

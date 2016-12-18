@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Keyboard = props => {
-  console.log('****Keyboard Props****', props);
+  // console.log('****Keyboard Props****', props);
   return (
     <div id="keyboard">
       <canvas data-nx="keyboard"></canvas>

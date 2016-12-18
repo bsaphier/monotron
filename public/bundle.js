@@ -60,15 +60,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// 
-	// class CanvasComp extends React.Component {
-	//   render() {
-	//     return (
-	//       <canvas data-nx="keyboard"></canvas>
-	//     );
-	//   }
-	// }
-	
 	_reactDom2.default.render(_react2.default.createElement(
 	  'div',
 	  null,
@@ -21498,13 +21489,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _initialState = __webpack_require__(179);
-	
-	var _initialState2 = _interopRequireDefault(_initialState);
-	
 	var _audio = __webpack_require__(180);
 	
 	var _audio2 = _interopRequireDefault(_audio);
+	
+	var _initialState = __webpack_require__(179);
+	
+	var _initialState2 = _interopRequireDefault(_initialState);
 	
 	var _Monotron = __webpack_require__(181);
 	
@@ -21527,24 +21518,29 @@
 	    var _this = _possibleConstructorReturn(this, (AppContainer.__proto__ || Object.getPrototypeOf(AppContainer)).call(this, props));
 	
 	    _this.state = _initialState2.default;
-	    _this.audioContext = _this.audioContext.bind(_this);
+	    _this.createAudioContext = _this.createAudioContext.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(AppContainer, [{
-	    key: 'audioContext',
-	    value: function audioContext(opts) {
+	    key: 'createAudioContext',
+	    value: function createAudioContext(opts) {
 	      return (0, _audio2.default)(opts);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var audioNode = this.audioContext();
+	      var audioNode = this.createAudioContext();
+	      var masterGain = audioNode.createGain();
+	      masterGain.gain.value = 0.7;
+	      masterGain.connect(audioNode.destination);
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container-fluid' },
 	        _react2.default.createElement(_Monotron2.default, {
 	          audioContext: audioNode,
+	          masterGain: masterGain,
 	          switchPos: 0 //*TODO*
 	          , keyNoteVal: 0 //*TODO*
 	          , intKnobVal: 0 //*TODO*
@@ -21611,28 +21607,36 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _monotron = __webpack_require__(182);
+	var _Knob = __webpack_require__(182);
+	
+	var _Knob2 = _interopRequireDefault(_Knob);
+	
+	var _Keyboard = __webpack_require__(183);
+	
+	var _Keyboard2 = _interopRequireDefault(_Keyboard);
+	
+	var _monotron = __webpack_require__(184);
 	
 	var _monotron2 = _interopRequireDefault(_monotron);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// import { Knob, Switch, Keyboard } from '../components';
-	
 	var Monotron = function Monotron(props) {
 	
-	  var switchPos = props.switchPos;
-	  var keyNoteVal = props.keyNoteVal;
-	  var intKnobVal = props.intKnobVal;
-	  var rateKnobVal = props.rateKnobVal;
-	  var peakKnobVal = props.peakKnobVal;
-	  var pitchKnobVal = props.pitchKnobVal;
-	  var cutoffKnobVal = props.cutoffKnobVal;
+	  // const switchPos = props.switchPos;
+	  // const keyNoteVal = props.keyNoteVal;
+	  // const intKnobVal = props.intKnobVal;
+	  // const rateKnobVal = props.rateKnobVal;
+	  // const peakKnobVal = props.peakKnobVal;
+	  // const pitchKnobVal = props.pitchKnobVal;
+	  // const cutoffKnobVal = props.cutoffKnobVal;
 	  var monotron = new _monotron2.default(props.audioContext);
+	  monotron.connect(props.masterGain);
+	  console.log('****Monotron****', monotron);
 	
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'col-xs-12' },
+	    { className: 'container' },
 	    _react2.default.createElement(
 	      'h3',
 	      null,
@@ -21640,33 +21644,29 @@
 	    ),
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'container' },
+	      { className: 'row' },
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'row' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-4' },
-	          _react2.default.createElement('canvas', { 'data-nx': 'dial', id: 'VCO pitch' })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-4' },
-	          _react2.default.createElement('canvas', { 'data-nx': 'dial', id: 'LFO rate' }),
-	          _react2.default.createElement('canvas', { 'data-nx': 'dial', id: 'LFO int' })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-4' },
-	          _react2.default.createElement('canvas', { 'data-nx': 'dial', id: 'VCF cutoff' }),
-	          _react2.default.createElement('canvas', { 'data-nx': 'dial', id: 'VCF peak' })
-	        )
+	        { className: 'col-xs-4' },
+	        _react2.default.createElement(_Knob2.default, { instrument: monotron })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-4' },
+	        _react2.default.createElement(_Knob2.default, { instrument: monotron }),
+	        _react2.default.createElement(_Knob2.default, { instrument: monotron })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-4' },
+	        _react2.default.createElement(_Knob2.default, { instrument: monotron }),
+	        _react2.default.createElement(_Knob2.default, { instrument: monotron })
 	      )
 	    ),
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'text-center' },
-	      _react2.default.createElement('canvas', { 'data-nx': 'keyboard' })
+	      _react2.default.createElement(_Keyboard2.default, { instrument: monotron })
 	    )
 	  );
 	};
@@ -21675,6 +21675,59 @@
 
 /***/ },
 /* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Knob = function Knob(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement("canvas", { "data-nx": "dial" })
+	  );
+	};
+	
+	exports.default = Knob;
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Keyboard = function Keyboard(props) {
+	  // console.log('****Keyboard Props****', props);
+	  return _react2.default.createElement(
+	    "div",
+	    { id: "keyboard" },
+	    _react2.default.createElement("canvas", { "data-nx": "keyboard" })
+	  );
+	};
+	
+	exports.default = Keyboard;
+
+/***/ },
+/* 184 */
 /***/ function(module, exports) {
 
 	'use strict';
