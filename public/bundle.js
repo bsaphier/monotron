@@ -21489,11 +21489,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _audio = __webpack_require__(180);
+	var _audio = __webpack_require__(179);
 	
 	var _audio2 = _interopRequireDefault(_audio);
 	
-	var _initialState = __webpack_require__(179);
+	var _initialState = __webpack_require__(180);
 	
 	var _initialState2 = _interopRequireDefault(_initialState);
 	
@@ -21539,15 +21539,15 @@
 	        'div',
 	        { className: 'container-fluid' },
 	        _react2.default.createElement(_Monotron2.default, {
-	          audioContext: audioNode,
-	          masterGain: masterGain,
-	          switchPos: 0 //*TODO*
-	          , keyNoteVal: 0 //*TODO*
+	          keyNoteVal: 0 //*TODO*
 	          , intKnobVal: 0 //*TODO*
 	          , rateKnobVal: 0 //*TODO*
 	          , peakKnobVal: 0 //*TODO*
 	          , pitchKnobVal: 0 //*TODO*
 	          , cutoffKnobVal: 0 //*TODO*
+	          , masterGain: masterGain,
+	          audioContext: audioNode,
+	          switchPos: this.state.switchPos //*TODO*
 	        })
 	      );
 	    }
@@ -21567,31 +21567,31 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var initialState = {
-	  keyNoteVal: 0,
-	  switchPos: 0,
-	  intKnobVal: 0.0,
-	  rateKnobVal: 0.0,
-	  peakKnobVal: 0.0,
-	  pitchKnobVal: 0.0,
-	  cutoffKnobVal: 0.0
-	};
 	
-	exports.default = initialState;
+	exports.default = function (options) {
+	  return new AudioContext(options);
+	};
 
 /***/ },
 /* 180 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	exports.default = function (options) {
-	  return new AudioContext(options);
+	var initialState = {
+	  keyNoteVal: 0,
+	  intKnobVal: 0.0,
+	  rateKnobVal: 0.0,
+	  peakKnobVal: 0.0,
+	  pitchKnobVal: 0.0,
+	  switchPos: 'pitch',
+	  cutoffKnobVal: 0.0
 	};
+	
+	exports.default = initialState;
 
 /***/ },
 /* 181 */
@@ -21603,6 +21603,8 @@
 	  value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -21611,67 +21613,198 @@
 	
 	var _Knob2 = _interopRequireDefault(_Knob);
 	
-	var _Keyboard = __webpack_require__(183);
+	var _Keyboard = __webpack_require__(184);
 	
 	var _Keyboard2 = _interopRequireDefault(_Keyboard);
 	
-	var _monotron = __webpack_require__(184);
+	var _monotron = __webpack_require__(185);
 	
 	var _monotron2 = _interopRequireDefault(_monotron);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Monotron = function Monotron(props) {
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	  // const switchPos = props.switchPos;
-	  // const keyNoteVal = props.keyNoteVal;
-	  // const intKnobVal = props.intKnobVal;
-	  // const rateKnobVal = props.rateKnobVal;
-	  // const peakKnobVal = props.peakKnobVal;
-	  // const pitchKnobVal = props.pitchKnobVal;
-	  // const cutoffKnobVal = props.cutoffKnobVal;
-	  var monotron = new _monotron2.default(props.audioContext);
-	  monotron.connect(props.masterGain);
-	  console.log('****Monotron****', monotron);
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'container' },
-	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      'MONOTRON'
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'row' },
-	      _react2.default.createElement(
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* globals nx keyboard1 dial1 dial2 dial3 dial4 dial5 */
+	
+	
+	var Monotron = function (_Component) {
+	  _inherits(Monotron, _Component);
+	
+	  function Monotron(props) {
+	    _classCallCheck(this, Monotron);
+	
+	    var _this = _possibleConstructorReturn(this, (Monotron.__proto__ || Object.getPrototypeOf(Monotron)).call(this, props));
+	
+	    _this.state = {
+	      switchPos: props.switchPos,
+	      keyNoteVal: props.keyNoteVal,
+	      intKnobVal: props.intKnobVal,
+	      rateKnobVal: props.rateKnobVal,
+	      peakKnobVal: props.peakKnobVal,
+	      pitchKnobVal: props.pitchKnobVal,
+	      cutoffKnobVal: props.cutoffKnobVal
+	    };
+	    _this.watchKnobs = _this.watchKnobs.bind(_this);
+	    _this.handleKeyboard = _this.handleKeyboard.bind(_this);
+	    _this.handleKnobClick = _this.handleKnobClick.bind(_this);
+	    _this.handleSwitchChange = _this.handleSwitchChange.bind(_this);
+	    _this.monotron = new _monotron2.default(_this.props.audioContext);
+	    return _this;
+	  }
+	
+	  _createClass(Monotron, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.monotron.connect(this.props.masterGain);
+	    }
+	  }, {
+	    key: 'watchKnobs',
+	    value: function watchKnobs() {
+	      this.setState({
+	        intKnobVal: dial3.val,
+	        rateKnobVal: dial2.val,
+	        peakKnobVal: dial5.val,
+	        pitchKnobVal: dial1.val,
+	        cutoffKnobVal: dial4.val
+	      });
+	    }
+	  }, {
+	    key: 'handleKnobClick',
+	    value: function handleKnobClick(event) {
+	      var knobId = event.target.id;
+	      switch (knobId) {
+	        case 'dial1':
+	          console.log(dial1.val);
+	          break;
+	        case 'dial2':
+	          console.log(dial2.val);
+	          break;
+	        case 'dial3':
+	          console.log(dial3.val);
+	          break;
+	        case 'dial4':
+	          console.log(dial4.val);
+	          break;
+	        case 'dial5':
+	          console.log(dial5.val);
+	          break;
+	        default:
+	          console.log('button not found');
+	      }
+	    }
+	  }, {
+	    key: 'handleKeyboard',
+	    value: function handleKeyboard() {
+	      var frequency = nx.mtof(keyboard1.val.note);
+	      console.log(frequency);
+	    }
+	  }, {
+	    key: 'handleSwitchChange',
+	    value: function handleSwitchChange(event) {
+	      this.setState({ switchPos: event.target.value });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
 	        'div',
-	        { className: 'col-xs-4' },
-	        _react2.default.createElement(_Knob2.default, { instrument: monotron })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-4' },
-	        _react2.default.createElement(_Knob2.default, { instrument: monotron }),
-	        _react2.default.createElement(_Knob2.default, { instrument: monotron })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-4' },
-	        _react2.default.createElement(_Knob2.default, { instrument: monotron }),
-	        _react2.default.createElement(_Knob2.default, { instrument: monotron })
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'text-center' },
-	      _react2.default.createElement(_Keyboard2.default, { instrument: monotron })
-	    )
-	  );
-	};
+	        { className: 'container', onClick: this.watchKnobs },
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'MONOTRON'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-4' },
+	            _react2.default.createElement(
+	              'select',
+	              { name: 'LFO_dest', onChange: this.handleSwitchChange },
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'pitch' },
+	                'pitch'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'cutoff' },
+	                'cutoff'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-3' },
+	            _react2.default.createElement(_Knob2.default, {
+	              title: 'VCO_pitch',
+	              instrument: this.monotron,
+	              handleClick: this.handleKnobClick
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-2' },
+	            _react2.default.createElement(_Knob2.default, {
+	              title: 'LFO_rate',
+	              instrument: this.monotron,
+	              handleClick: this.handleKnobClick
+	            }),
+	            _react2.default.createElement(_Knob2.default, {
+	              title: 'LFO_int',
+	              instrument: this.monotron,
+	              handleClick: this.handleKnobClick
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-3' },
+	            _react2.default.createElement(_Knob2.default, {
+	              title: 'VCF_cutoff',
+	              instrument: this.monotron,
+	              handleClick: this.handleKnobClick
+	            }),
+	            _react2.default.createElement(_Knob2.default, {
+	              title: 'VCF_peak',
+	              instrument: this.monotron,
+	              handleClick: this.handleKnobClick
+	            })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'text-center' },
+	          _react2.default.createElement(_Keyboard2.default, {
+	            instrument: this.monotron,
+	            handleClick: this.handleKeyboard
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Monotron;
+	}(_react.Component);
 	
 	exports.default = Monotron;
+	
+	
+	Monotron.propTypes = {
+	  switchPos: _react.PropTypes.string,
+	  keyNoteVal: _react.PropTypes.number,
+	  intKnobVal: _react.PropTypes.number,
+	  masterGain: _react.PropTypes.object,
+	  rateKnobVal: _react.PropTypes.number,
+	  peakKnobVal: _react.PropTypes.number,
+	  audioContext: _react.PropTypes.object,
+	  pitchKnobVal: _react.PropTypes.number,
+	  cutoffKnobVal: _react.PropTypes.number
+	};
 
 /***/ },
 /* 182 */
@@ -21692,15 +21825,20 @@
 	var Knob = function Knob(props) {
 	  return _react2.default.createElement(
 	    "div",
-	    null,
+	    { onMouseDown: props.handleClick },
 	    _react2.default.createElement("canvas", { "data-nx": "dial" })
 	  );
+	};
+	
+	Knob.propTypes = {
+	  handleClick: _react.PropTypes.func
 	};
 	
 	exports.default = Knob;
 
 /***/ },
-/* 183 */
+/* 183 */,
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21716,18 +21854,21 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Keyboard = function Keyboard(props) {
-	  // console.log('****Keyboard Props****', props);
 	  return _react2.default.createElement(
 	    "div",
-	    { id: "keyboard" },
+	    { onMouseDown: props.handleClick },
 	    _react2.default.createElement("canvas", { "data-nx": "keyboard" })
 	  );
+	};
+	
+	Keyboard.propTypes = {
+	  handleClick: _react.PropTypes.func
 	};
 	
 	exports.default = Keyboard;
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports) {
 
 	'use strict';

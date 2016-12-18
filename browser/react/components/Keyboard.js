@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const Keyboard = props => {
-  // console.log('****Keyboard Props****', props);
   return (
-    <div id="keyboard">
+    <div onMouseDown={ props.handleClick }>
       <canvas data-nx="keyboard"></canvas>
     </div>
   );
+};
+
+Keyboard.propTypes = {
+  handleClick: PropTypes.func
 };
 
 export default Keyboard;
