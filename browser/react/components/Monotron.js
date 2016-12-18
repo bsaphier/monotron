@@ -1,6 +1,6 @@
 import React from 'react';
 import MonotronConstructor from '../../../bin/monotron';
-// import { Knob, Switch, Keyboard } from '../components';
+import { Knob, Switch, Keyboard } from '../components';
 
 const Monotron = (props) => {
 
@@ -14,41 +14,43 @@ const Monotron = (props) => {
   const monotron = new MonotronConstructor(props.audioContext);
 
   return (
-    <div className="col-xs-12">
+    <div className="container">
       <h3>MONOTRON</h3>
-      {/*
-      <div>
-        <Knob instrument={monotron} />
+      <div className="row">
+        <div className="col-xs-4">
+          <Knob instrument={monotron} />
+        </div>
+        <div className="col-xs-4">
+          <Knob instrument={monotron} />
+          <Knob instrument={monotron} />
+        </div>
+        <div className="col-xs-4">
+          <Knob instrument={monotron} />
+          <Knob instrument={monotron} />
+        </div>
+        {/* <div className="col-xs-*">
+          <Switch instrument={monotron} />
+        </div> */}
       </div>
-      <div>
-        <Switch instrument={monotron} />
-      </div>
-      <div>
+      <div className="text-center">
         <Keyboard instrument={monotron} />
       </div>
-      */}
-
-          <div className="container">
-            <div className="row">
-              <div className="col-xs-4">
-                <canvas data-nx="dial" id="VCO pitch"></canvas>
-              </div>
-              <div className="col-xs-4">
-                <canvas data-nx="dial" id="LFO rate"></canvas>
-                <canvas data-nx="dial" id="LFO int"></canvas>
-              </div>
-              <div className="col-xs-4">
-                <canvas data-nx="dial" id="VCF cutoff"></canvas>
-                <canvas data-nx="dial" id="VCF peak"></canvas>
-              </div>
-            </div>
+    </div>
+          {/* <div className="col-xs-4">
+            <canvas data-nx="dial" id="VCO pitch"></canvas>
+          </div>
+          <div className="col-xs-4">
+            <canvas data-nx="dial" id="LFO rate"></canvas>
+            <canvas data-nx="dial" id="LFO int"></canvas>
+          </div>
+          <div className="col-xs-4">
+            <canvas data-nx="dial" id="VCF cutoff"></canvas>
+            <canvas data-nx="dial" id="VCF peak"></canvas>
           </div>
 
           <div className="text-center">
             <canvas data-nx="keyboard"></canvas>
-          </div>
-
-    </div>
+          </div> */}
   );
 };
 
