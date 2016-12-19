@@ -1,16 +1,14 @@
 import React, { PropTypes } from 'react';
 
-const Knob = props => {
-  return (
-    <div onMouseDown={ props.handleClick }>
-      <canvas data-nx="dial" label={props.label}></canvas>
-    </div>
-  );
-};
+const Knob = props => (
+  <div>
+    <h5>{props.label}</h5>
+    <canvas data-nx="dial"></canvas>
+  </div>
+);
 
 Knob.propTypes = {
-  label: PropTypes.string,
-  handleClick: PropTypes.func
+  label: PropTypes.string
 };
 
 export default Knob;

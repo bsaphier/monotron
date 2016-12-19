@@ -1,16 +1,15 @@
 import React, { PropTypes } from 'react';
 
-const Switch = props => {
-  return (
-    <div onClick={props.handleChange}>
-      <canvas data-nx="select" data-choices={props.choices}></canvas>
-    </div>
-  );
-};
+const Switch = props => (
+  <div>
+    <h5>{props.label}</h5>
+    <canvas data-nx="select" data-choices={props.choices}></canvas>
+  </div>
+);
 
 Switch.propTypes = {
-  choices: PropTypes.string,
-  handleChange: PropTypes.func
+  label: PropTypes.string,
+  choices: PropTypes.string
 };
 
-// export default Switch;
+export default Switch;
