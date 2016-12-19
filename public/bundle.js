@@ -21544,11 +21544,11 @@
 	
 	var _Knob2 = _interopRequireDefault(_Knob);
 	
-	var _Switch = __webpack_require__(182);
+	var _Switch = __webpack_require__(181);
 	
 	var _Switch2 = _interopRequireDefault(_Switch);
 	
-	var _Keyboard = __webpack_require__(181);
+	var _Keyboard = __webpack_require__(182);
 	
 	var _Keyboard2 = _interopRequireDefault(_Keyboard);
 	
@@ -21649,32 +21649,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Keyboard = function Keyboard() {
-	  return _react2.default.createElement(
-	    "div",
-	    null,
-	    _react2.default.createElement("canvas", { "data-nx": "keyboard" })
-	  );
-	};
-	
-	exports.default = Keyboard;
-
-/***/ },
-/* 182 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
 	var Switch = function Switch(props) {
 	  return _react2.default.createElement(
 	    "div",
@@ -21694,6 +21668,32 @@
 	};
 	
 	exports.default = Switch;
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Keyboard = function Keyboard() {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement("canvas", { "data-nx": "keyboard" })
+	  );
+	};
+	
+	exports.default = Keyboard;
 
 /***/ }
 /******/ ]);
