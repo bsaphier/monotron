@@ -21638,7 +21638,10 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Monotron.__proto__ || Object.getPrototypeOf(Monotron)).call(this, props));
 	
+	    var monotron = new _monotron2.default(_this.props.audioContext);
+	    monotron.connect(_this.props.masterGain);
 	    _this.state = {
+	      monotron: monotron,
 	      switchPos: props.switchPos,
 	      keyNoteVal: props.keyNoteVal,
 	      intKnobVal: props.intKnobVal,
@@ -21647,80 +21650,77 @@
 	      pitchKnobVal: props.pitchKnobVal,
 	      cutoffKnobVal: props.cutoffKnobVal
 	    };
-	    _this.nxLoad = _this.nxLoad.bind(_this);
-	    // this.keyDown = this.keyDown.bind(this);
-	    // this.watchKnobs = this.watchKnobs.bind(this);
-	    // this.handleKnobClick = this.handleKnobClick.bind(this);
-	    // this.handleSwitchChange = this.handleSwitchChange.bind(this);
+	    _this.keyUp = _this.keyUp.bind(_this);
+	    _this.keyDown = _this.keyDown.bind(_this);
+	    _this.watchKnobs = _this.watchKnobs.bind(_this);
+	    _this.handleKnobClick = _this.handleKnobClick.bind(_this);
+	    _this.handleSwitchChange = _this.handleSwitchChange.bind(_this);
+	
 	    return _this;
 	  }
 	
+	  // componentDidMount () {
+	  // }
+	
 	  _createClass(Monotron, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.monotron = new _monotron2.default(this.props.audioContext);
-	      this.monotron.connect(this.props.masterGain);
-	    }
-	  }, {
-	    key: 'nxLoad',
-	    value: function nxLoad() {
-	      this.monotron.noteOn(nx.mtof(keyboard1.val.note));
-	      console.log('**data**', this.monotron);
-	      keyboard1.on('*', function (data) {
-	        var freq = nx.mtof(data.note);
+	    key: 'watchKnobs',
+	    value: function watchKnobs() {
+	      this.setState({
+	        intKnobVal: dial3.val,
+	        rateKnobVal: dial2.val,
+	        peakKnobVal: dial5.val,
+	        pitchKnobVal: dial1.val,
+	        cutoffKnobVal: dial4.val
 	      });
 	    }
-	
-	    // watchKnobs () {
-	    //   this.setState({
-	    //     intKnobVal: dial3.val,
-	    //     rateKnobVal: dial2.val,
-	    //     peakKnobVal: dial5.val,
-	    //     pitchKnobVal: dial1.val,
-	    //     cutoffKnobVal: dial4.val
-	    //   });
-	    // }
-	    //
-	    // handleKnobClick (event) {
-	    //   const knobId = event.target.id;
-	    //   switch (knobId) {
-	    //     case 'dial1':
-	    //       console.log(dial1.val);
-	    //       break;
-	    //     case 'dial2':
-	    //       console.log(dial2.val);
-	    //       break;
-	    //     case 'dial3':
-	    //       console.log(dial3.val);
-	    //       break;
-	    //     case 'dial4':
-	    //       console.log(dial4.val);
-	    //       break;
-	    //     case 'dial5':
-	    //       console.log(dial5.val);
-	    //       break;
-	    //     default:
-	    //       console.log('button not found');
-	    //   }
-	    // }
-	    //
-	    // keyDown () {
-	    //   const frequency = nx.mtof(keyboard1.val.note);
-	    //   console.log(frequency);
-	    // }
-	    //
-	    // handleSwitchChange (event) {
-	    //   this.setState({switchPos: event.target.value});
-	    // }
-	
+	  }, {
+	    key: 'handleKnobClick',
+	    value: function handleKnobClick(event) {
+	      var knobId = event.target.id;
+	      switch (knobId) {
+	        case 'dial1':
+	          console.log(dial1.val);
+	          break;
+	        case 'dial2':
+	          console.log(dial2.val);
+	          break;
+	        case 'dial3':
+	          console.log(dial3.val);
+	          break;
+	        case 'dial4':
+	          console.log(dial4.val);
+	          break;
+	        case 'dial5':
+	          console.log(dial5.val);
+	          break;
+	        default:
+	          console.log('button not found');
+	      }
+	    }
+	  }, {
+	    key: 'keyDown',
+	    value: function keyDown() {
+	      var frequency = nx.mtof(keyboard1.val.note);
+	      this.setState({ keyNoteVal: frequency });
+	      this.state.monotron.noteOn(frequency);
+	      console.log(frequency);
+	    }
+	  }, {
+	    key: 'keyUp',
+	    value: function keyUp() {
+	      this.state.monotron.noteOff();
+	    }
+	  }, {
+	    key: 'handleSwitchChange',
+	    value: function handleSwitchChange(event) {
+	      this.setState({ switchPos: event.target.value });
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'container', onClick: this.nxLoad },
-	        ' //onClick=',
-	        this.watchKnobs,
+	        { className: 'container', onClick: this.watchKnobs },
 	        _react2.default.createElement(
 	          'h3',
 	          null,
@@ -21734,9 +21734,7 @@
 	            { className: 'col-xs-4' },
 	            _react2.default.createElement(
 	              'select',
-	              { name: 'LFO_dest' },
-	              ' //onChange=',
-	              this.handleSwitchChange,
+	              { name: 'LFO_dest', onChange: this.handleSwitchChange },
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'pitch' },
@@ -21753,47 +21751,47 @@
 	            'div',
 	            { className: 'col-xs-3' },
 	            _react2.default.createElement(_Knob2.default, {
-	              title: 'VCO_pitch',
-	              instrument: this.monotron
-	              //handleClick={this.handleKnobClick}
+	              label: 'VCO_pitch',
+	              instrument: this.state.monotron,
+	              handleClick: this.handleKnobClick
 	            })
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col-xs-2' },
 	            _react2.default.createElement(_Knob2.default, {
-	              title: 'LFO_rate',
-	              instrument: this.monotron
-	              //handleClick={this.handleKnobClick}
+	              label: 'LFO_rate',
+	              instrument: this.state.monotron,
+	              handleClick: this.handleKnobClick
 	            }),
 	            _react2.default.createElement(_Knob2.default, {
-	              title: 'LFO_int',
-	              instrument: this.monotron
-	              //handleClick={this.handleKnobClick}
+	              label: 'LFO_int',
+	              instrument: this.state.monotron,
+	              handleClick: this.handleKnobClick
 	            })
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col-xs-3' },
 	            _react2.default.createElement(_Knob2.default, {
-	              title: 'VCF_cutoff',
-	              instrument: this.monotron
-	              //handleClick={this.handleKnobClick}
+	              label: 'VCF_cutoff',
+	              instrument: this.state.monotron,
+	              handleClick: this.handleKnobClick
 	            }),
 	            _react2.default.createElement(_Knob2.default, {
-	              title: 'VCF_peak',
-	              instrument: this.monotron
-	              //handleClick={this.handleKnobClick}
+	              label: 'VCF_peak',
+	              instrument: this.state.monotron,
+	              handleClick: this.handleKnobClick
 	            })
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'text-center' },
-	          _react2.default.createElement(_Keyboard2.default, {
-	            instrument: this.monotron,
-	            nxLoad: this.nxLoad
-	            //keyDown={this.keyDown}
+	          _react2.default.createElement(_Keyboard2.default
+	          // keyUp={this.state.monotron}
+	          // keyDown={this.state.monotron.noteOn}
+	          , { instrument: this.state.monotron
 	          })
 	        )
 	      );
@@ -21838,11 +21836,12 @@
 	  return _react2.default.createElement(
 	    "div",
 	    { onMouseDown: props.handleClick },
-	    _react2.default.createElement("canvas", { "data-nx": "dial" })
+	    _react2.default.createElement("canvas", { "data-nx": "dial", label: props.label })
 	  );
 	};
 	
 	Knob.propTypes = {
+	  label: _react.PropTypes.string,
 	  handleClick: _react.PropTypes.func
 	};
 	
@@ -21865,18 +21864,18 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Keyboard = function Keyboard(props) {
-	  //onMouseDown={props.keyDown}
-	  // props.nxLoad();
+	  console.log(props);
 	  return _react2.default.createElement(
 	    "div",
-	    null,
+	    { onClick: props.instrument, onMouseUp: props.instrument },
 	    _react2.default.createElement("canvas", { "data-nx": "keyboard" })
 	  );
 	};
 	
-	Keyboard.propTypes = {
-	  keyDown: _react.PropTypes.func
-	};
+	// Keyboard.propTypes = {
+	//   keyUp: PropTypes.func,
+	//   keyDown: PropTypes.func
+	// };
 	
 	exports.default = Keyboard;
 
@@ -21929,9 +21928,9 @@
 	      this.output.gain.linearRampToValueAtTime(1.0, time + 0.1);
 	    }
 	  }, {
-	    key: 'nodeOff',
-	    value: function nodeOff() {
-	      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.audioContext.currentTime;
+	    key: 'noteOff',
+	    value: function noteOff(freq) {
+	      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.audioContext.currentTime;
 	
 	      this.output.gian.linearRampToValueAtTime(0.0, time + 0.1);
 	    }

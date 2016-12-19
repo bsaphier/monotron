@@ -28,7 +28,7 @@ export default class MonotronConstructor {
     this.output.gain.linearRampToValueAtTime(1.0, time + 0.1);
   }
 
-  nodeOff (time = this.audioContext.currentTime) {
+  noteOff (freq, time = this.audioContext.currentTime) {
     this.output.gian.linearRampToValueAtTime(0.0, time + 0.1);
   }
 
