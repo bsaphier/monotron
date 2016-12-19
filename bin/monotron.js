@@ -21,6 +21,12 @@ export default class MonotronConstructor {
 
     this.vco.start(audioContext.currentTime);
     this.lfo.start(audioContext.currentTime);
+
+    // bind functions to this context
+    this.noteOn = this.noteOn.bind(this);
+    this.noteOff = this.noteOff.bind(this);
+    this.connect = this.connect.bind(this);
+    this.switchLFODest = this.switchLFODest.bind(this);
   }
 
   noteOn (freq, time = this.audioContext.currentTime) {
@@ -30,6 +36,15 @@ export default class MonotronConstructor {
 
   noteOff (freq, time = this.audioContext.currentTime) {
     this.output.gian.linearRampToValueAtTime(0.0, time + 0.1);
+  }
+
+  switchLFODest (currentSelection) {
+    this.lfoGain.disconnect();
+    if (currentSelection === 'cutoff') {
+      this.lfoGain.connect(this.vcf.frequency);
+    } else {
+      this.lfoGain.connect(this.vco.frequency);
+    }
   }
 
   connect (target) {

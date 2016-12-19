@@ -21489,10 +21489,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _audio = __webpack_require__(179);
-	
-	var _audio2 = _interopRequireDefault(_audio);
-	
 	var _initialState = __webpack_require__(180);
 	
 	var _initialState2 = _interopRequireDefault(_initialState);
@@ -21509,6 +21505,9 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// import audioContext from '../audio';
+	
+	
 	var AppContainer = function (_Component) {
 	  _inherits(AppContainer, _Component);
 	
@@ -21518,36 +21517,33 @@
 	    var _this = _possibleConstructorReturn(this, (AppContainer.__proto__ || Object.getPrototypeOf(AppContainer)).call(this, props));
 	
 	    _this.state = _initialState2.default;
-	    _this.createAudioContext = _this.createAudioContext.bind(_this);
 	    return _this;
 	  }
 	
+	  // createAudioContext (opts) {
+	  //   return audioContext(opts);
+	  // }
+	
 	  _createClass(AppContainer, [{
-	    key: 'createAudioContext',
-	    value: function createAudioContext(opts) {
-	      return (0, _audio2.default)(opts);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var audioNode = this.createAudioContext();
-	      var masterGain = audioNode.createGain();
-	      masterGain.gain.value = 0.7;
-	      masterGain.connect(audioNode.destination);
+	      // const audioNode = this.createAudioContext();
+	      // const masterGain = audioNode.createGain();
+	      // masterGain.gain.value = 0.7;
+	      // masterGain.connect(audioNode.destination);
 	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container-fluid' },
 	        _react2.default.createElement(_Monotron2.default, {
-	          keyNoteVal: 0 //*TODO*
-	          , intKnobVal: 0 //*TODO*
-	          , rateKnobVal: 0 //*TODO*
-	          , peakKnobVal: 0 //*TODO*
-	          , pitchKnobVal: 0 //*TODO*
-	          , cutoffKnobVal: 0 //*TODO*
-	          , masterGain: masterGain,
-	          audioContext: audioNode,
-	          switchPos: this.state.switchPos //*TODO*
+	          keyNoteVal: 0.0 //*TODO*
+	          , intKnobVal: 0.0 //*TODO*
+	          , rateKnobVal: 0.0 //*TODO*
+	          , peakKnobVal: 0.0 //*TODO*
+	          , pitchKnobVal: 0.0 //*TODO*
+	          , cutoffKnobVal: 0.0 //*TODO*
+	          , lfoDest: this.state.lfoDest //*TODO*
+	          , instrument: _initialState.monotron //*TODO*
 	        })
 	      );
 	    }
@@ -21574,21 +21570,41 @@
 
 /***/ },
 /* 180 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.monotron = undefined;
+	
+	var _audio = __webpack_require__(179);
+	
+	var _audio2 = _interopRequireDefault(_audio);
+	
+	var _monotron = __webpack_require__(184);
+	
+	var _monotron2 = _interopRequireDefault(_monotron);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var audioNode = new AudioContext();
+	var masterGain = audioNode.createGain();
+	var monotron = exports.monotron = new _monotron2.default(audioNode);
+	
+	masterGain.gain.value = 0.7;
+	monotron.connect(masterGain);
+	masterGain.connect(audioNode.destination);
+	
 	var initialState = {
 	  keyNoteVal: 0,
 	  intKnobVal: 0.0,
 	  rateKnobVal: 0.0,
 	  peakKnobVal: 0.0,
 	  pitchKnobVal: 0.0,
-	  switchPos: 'pitch',
-	  cutoffKnobVal: 0.0
+	  cutoffKnobVal: 0.0,
+	  lfoDest: 'pitch'
 	};
 	
 	exports.default = initialState;
@@ -21617,10 +21633,6 @@
 	
 	var _Keyboard2 = _interopRequireDefault(_Keyboard);
 	
-	var _monotron = __webpack_require__(184);
-	
-	var _monotron2 = _interopRequireDefault(_monotron);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21630,6 +21642,8 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* globals nx keyboard1 dial1 dial2 dial3 dial4 dial5 */
 	
 	
+	// import MonotronConstructor from '../../../bin/monotron';
+	
 	var Monotron = function (_Component) {
 	  _inherits(Monotron, _Component);
 	
@@ -21638,10 +21652,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Monotron.__proto__ || Object.getPrototypeOf(Monotron)).call(this, props));
 	
-	    var monotron = new _monotron2.default(_this.props.audioContext);
-	    monotron.connect(_this.props.masterGain);
 	    _this.state = {
-	      monotron: monotron,
 	      switchPos: props.switchPos,
 	      keyNoteVal: props.keyNoteVal,
 	      intKnobVal: props.intKnobVal,
@@ -21702,13 +21713,13 @@
 	    value: function keyDown() {
 	      var frequency = nx.mtof(keyboard1.val.note);
 	      this.setState({ keyNoteVal: frequency });
-	      this.state.monotron.noteOn(frequency);
+	      // this.state.monotron.noteOn(frequency);
 	      console.log(frequency);
 	    }
 	  }, {
 	    key: 'keyUp',
 	    value: function keyUp() {
-	      this.state.monotron.noteOff();
+	      // this.state.monotron.noteOff();
 	    }
 	  }, {
 	    key: 'handleSwitchChange',
@@ -21751,37 +21762,37 @@
 	            'div',
 	            { className: 'col-xs-3' },
 	            _react2.default.createElement(_Knob2.default, {
-	              label: 'VCO_pitch',
-	              instrument: this.state.monotron,
-	              handleClick: this.handleKnobClick
+	              label: 'VCO_pitch'
+	              // instrument={this.state.monotron}
+	              , handleClick: this.handleKnobClick
 	            })
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col-xs-2' },
 	            _react2.default.createElement(_Knob2.default, {
-	              label: 'LFO_rate',
-	              instrument: this.state.monotron,
-	              handleClick: this.handleKnobClick
+	              label: 'LFO_rate'
+	              // instrument={this.state.monotron}
+	              , handleClick: this.handleKnobClick
 	            }),
 	            _react2.default.createElement(_Knob2.default, {
-	              label: 'LFO_int',
-	              instrument: this.state.monotron,
-	              handleClick: this.handleKnobClick
+	              label: 'LFO_int'
+	              // instrument={this.state.monotron}
+	              , handleClick: this.handleKnobClick
 	            })
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col-xs-3' },
 	            _react2.default.createElement(_Knob2.default, {
-	              label: 'VCF_cutoff',
-	              instrument: this.state.monotron,
-	              handleClick: this.handleKnobClick
+	              label: 'VCF_cutoff'
+	              // instrument={this.state.monotron}
+	              , handleClick: this.handleKnobClick
 	            }),
 	            _react2.default.createElement(_Knob2.default, {
-	              label: 'VCF_peak',
-	              instrument: this.state.monotron,
-	              handleClick: this.handleKnobClick
+	              label: 'VCF_peak'
+	              // instrument={this.state.monotron}
+	              , handleClick: this.handleKnobClick
 	            })
 	          )
 	        ),
@@ -21791,8 +21802,8 @@
 	          _react2.default.createElement(_Keyboard2.default
 	          // keyUp={this.state.monotron}
 	          // keyDown={this.state.monotron.noteOn}
-	          , { instrument: this.state.monotron
-	          })
+	          // instrument={this.state.monotron}
+	          , null)
 	        )
 	      );
 	    }
@@ -21864,7 +21875,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Keyboard = function Keyboard(props) {
-	  console.log(props);
+	  console.log(props.instrument);
 	  return _react2.default.createElement(
 	    "div",
 	    { onClick: props.instrument, onMouseUp: props.instrument },
@@ -21917,6 +21928,12 @@
 	
 	    this.vco.start(audioContext.currentTime);
 	    this.lfo.start(audioContext.currentTime);
+	
+	    // bind functions to this context
+	    this.noteOn = this.noteOn.bind(this);
+	    this.noteOff = this.noteOff.bind(this);
+	    this.connect = this.connect.bind(this);
+	    this.switchLFODest = this.switchLFODest.bind(this);
 	  }
 	
 	  _createClass(MonotronConstructor, [{
@@ -21933,6 +21950,16 @@
 	      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.audioContext.currentTime;
 	
 	      this.output.gian.linearRampToValueAtTime(0.0, time + 0.1);
+	    }
+	  }, {
+	    key: 'switchLFODest',
+	    value: function switchLFODest(currentSelection) {
+	      this.lfoGain.disconnect();
+	      if (currentSelection === 'cutoff') {
+	        this.lfoGain.connect(this.vcf.frequency);
+	      } else {
+	        this.lfoGain.connect(this.vco.frequency);
+	      }
 	    }
 	  }, {
 	    key: 'connect',

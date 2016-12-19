@@ -3,16 +3,13 @@ import React, { Component, PropTypes } from 'react';
 
 import Knob from './Knob.js';
 import Keyboard from './Keyboard.js';
-import MonotronConstructor from '../../../bin/monotron';
+// import MonotronConstructor from '../../../bin/monotron';
 
 export default class Monotron extends Component {
 
   constructor (props) {
     super(props);
-    const monotron = new MonotronConstructor(this.props.audioContext);
-    monotron.connect(this.props.masterGain);
     this.state = {
-      monotron: monotron,
       switchPos: props.switchPos,
       keyNoteVal: props.keyNoteVal,
       intKnobVal: props.intKnobVal,
@@ -68,12 +65,12 @@ export default class Monotron extends Component {
   keyDown () {
     const frequency = nx.mtof(keyboard1.val.note);
     this.setState({keyNoteVal: frequency});
-    this.state.monotron.noteOn(frequency);
+    // this.state.monotron.noteOn(frequency);
     console.log(frequency);
   }
 
   keyUp () {
-    this.state.monotron.noteOff();
+    // this.state.monotron.noteOff();
   }
 
   handleSwitchChange (event) {
@@ -97,7 +94,7 @@ export default class Monotron extends Component {
           <div className="col-xs-3">
             <Knob
               label="VCO_pitch"
-              instrument={this.state.monotron}
+              // instrument={this.state.monotron}
               handleClick={this.handleKnobClick}
             />
           </div>
@@ -105,12 +102,12 @@ export default class Monotron extends Component {
           <div className="col-xs-2">
             <Knob
               label="LFO_rate"
-              instrument={this.state.monotron}
+              // instrument={this.state.monotron}
               handleClick={this.handleKnobClick}
             />
             <Knob
               label="LFO_int"
-              instrument={this.state.monotron}
+              // instrument={this.state.monotron}
               handleClick={this.handleKnobClick}
             />
           </div>
@@ -118,12 +115,12 @@ export default class Monotron extends Component {
           <div className="col-xs-3">
             <Knob
               label="VCF_cutoff"
-              instrument={this.state.monotron}
+              // instrument={this.state.monotron}
               handleClick={this.handleKnobClick}
             />
             <Knob
               label="VCF_peak"
-              instrument={this.state.monotron}
+              // instrument={this.state.monotron}
               handleClick={this.handleKnobClick}
             />
           </div>
@@ -133,7 +130,7 @@ export default class Monotron extends Component {
           <Keyboard
             // keyUp={this.state.monotron}
             // keyDown={this.state.monotron.noteOn}
-            instrument={this.state.monotron}
+            // instrument={this.state.monotron}
           />
         </div>
 
