@@ -1,15 +1,17 @@
 import React, { PropTypes } from 'react';
 
-const Keyboard = props => {
+const Keyboard = (props) => {
+  //onMouseDown={props.keyDown}
+  // props.nxLoad();
   return (
-    <div onMouseDown={ props.handleClick }>
+    <div>
       <canvas data-nx="keyboard"></canvas>
     </div>
   );
 };
 
 Keyboard.propTypes = {
-  handleClick: PropTypes.func
+  keyDown: PropTypes.func
 };
 
 export default Keyboard;
