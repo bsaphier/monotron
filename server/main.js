@@ -11,16 +11,18 @@ var indexPath = path.join(rootPath, './browser/index.html');
 var app = express();
 module.exports = app;
 
+var binPath = path.join(rootPath, './bin');
 var publicPath = path.join(rootPath, './public');
 var browserPath = path.join(rootPath, './browser');
 var npmPath = path.join(rootPath, './node_modules');
 
-// ***** serve static files ***** //
+/* ---> serve static files <--- */
 app.use(express.static(npmPath));
+app.use(express.static(binPath));
 app.use(express.static(publicPath));
 app.use(express.static(browserPath));
 
-// ***** parse the POST and PUT bodies ***** //
+/* ---> parse the POST and PUT bodies <--- */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -37,12 +39,12 @@ app.use( (req, res, next) => {
     }
 });
 
-// ***** serve files to corresponding URLs ***** //
+/* ---> serve files to corresponding URLs <--- */
 app.get('/*', (req, res) => {
     res.sendFile(indexPath);
 });
 
-// ***** error catching endware ***** //
+/* ---> error catching endware <--- */
 app.use((err, req, res, next) => {
     console.error(err, typeof next);
     console.error(err.stack);

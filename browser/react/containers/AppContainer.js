@@ -1,12 +1,14 @@
-'use strict';
 import React, { Component } from 'react';
-import Monotron from '../components/Monotron.js';
+import MonotronContainer from './MonotronContainer.js';
 
 export default class AppContainer extends Component {
   render () {
     return (
       <div className="container-fluid">
-        <Monotron />
+        <div className="container text-center">
+          <MonotronContainer />
+        </div>
+        <canvas data-nx="typewriter"></canvas>
       </div>
     );
   }

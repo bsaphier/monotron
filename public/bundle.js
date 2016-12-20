@@ -21489,9 +21489,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Monotron = __webpack_require__(179);
+	var _MonotronContainer = __webpack_require__(185);
 	
-	var _Monotron2 = _interopRequireDefault(_Monotron);
+	var _MonotronContainer2 = _interopRequireDefault(_MonotronContainer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21516,7 +21516,12 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container-fluid' },
-	        _react2.default.createElement(_Monotron2.default, null)
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container text-center' },
+	          _react2.default.createElement(_MonotronContainer2.default, null)
+	        ),
+	        _react2.default.createElement('canvas', { 'data-nx': 'typewriter' })
 	      );
 	    }
 	  }]);
@@ -21527,78 +21532,7 @@
 	exports.default = AppContainer;
 
 /***/ },
-/* 179 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Knob = __webpack_require__(180);
-	
-	var _Knob2 = _interopRequireDefault(_Knob);
-	
-	var _Switch = __webpack_require__(181);
-	
-	var _Switch2 = _interopRequireDefault(_Switch);
-	
-	var _Keyboard = __webpack_require__(182);
-	
-	var _Keyboard2 = _interopRequireDefault(_Keyboard);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Monotron = function Monotron() {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'container' },
-	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      'MONOTRON'
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'row' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-4' },
-	        _react2.default.createElement(_Switch2.default, { label: 'LFO Dest.', choices: 'Pitch,Cutoff' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-3' },
-	        _react2.default.createElement(_Knob2.default, { label: 'VCO' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-2' },
-	        _react2.default.createElement(_Knob2.default, { label: 'LFO Rate' }),
-	        _react2.default.createElement(_Knob2.default, { label: 'LFO Int' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-3' },
-	        _react2.default.createElement(_Knob2.default, { label: 'VCF Cutoff' }),
-	        _react2.default.createElement(_Knob2.default, { label: 'VCF Peak' })
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'text-center' },
-	      _react2.default.createElement(_Keyboard2.default, null)
-	    )
-	  );
-	};
-	exports.default = Monotron;
-
-/***/ },
+/* 179 */,
 /* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21694,6 +21628,224 @@
 	};
 	
 	exports.default = Keyboard;
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _MonotronConstructor2 = __webpack_require__(184);
+	
+	var _MonotronConstructor3 = _interopRequireDefault(_MonotronConstructor2);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var _audioContext = function _audioContext(options) {
+	  return new AudioContext(options);
+	}; /* globals nx keyboard1 select1 dial2 dial3 dial4 dial5 */
+	
+	var _createAudioContext = function _createAudioContext(opts) {
+	  return _audioContext(opts);
+	};
+	
+	var _audioNode = _createAudioContext();
+	var _monotron = new _MonotronConstructor3.default(_audioNode);
+	var _masterGain = _audioNode.createGain();
+	
+	_masterGain.gain.value = 0.7;
+	_masterGain.connect(_audioNode.destination);
+	_monotron.connect(_masterGain);
+	
+	/* ---> NexusUI Utils <--- */
+	var _midiToFreq = function _midiToFreq(midiNote) {
+	  return nx.mtof(midiNote);
+	};
+	var _dialListenerCreator = function _dialListenerCreator(name, max, param) {
+	  name.on('*', function (data) {
+	    // >>> TODO change how value is calcualted <<<
+	    var value = data.value * max;
+	    param.setValueAtTime(value, _audioNode.currentTime);
+	  });
+	};
+	
+	/* ---> NexusUI Actions <--- */
+	
+	exports.default = nx.onload = function () {
+	
+	  keyboard1.on('*', function (data) {
+	    return keyboard1.clicked ? _monotron.noteOn(_midiToFreq(data.note)) : _monotron.noteOff();
+	  });
+	
+	  select1.on('*', function (data) {
+	    _monotron.switchLFODest(data.text);
+	  });
+	
+	  // >>> TODO VCO knob <<<
+	  // >>> _dialListenerCreator(dial1, 1, _monotron); <<<
+	  _dialListenerCreator(dial2, 20, _monotron.lfo.frequency);
+	  _dialListenerCreator(dial3, 100, _monotron.lfoGain.gain);
+	  _dialListenerCreator(dial4, 2200, _monotron.vcf.frequency);
+	  _dialListenerCreator(dial5, 100, _monotron.vcf.Q);
+	};
+
+/***/ },
+/* 184 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var _MonotronConstructor = function () {
+	  function _MonotronConstructor(audioContext) {
+	    _classCallCheck(this, _MonotronConstructor);
+	
+	    this.audioContext = audioContext;
+	
+	    this.lfoGain = audioContext.createGain();
+	    this.lfo = audioContext.createOscillator();
+	    this.vco = audioContext.createOscillator();
+	    // >>> I'm going to want to design/create a different filter <<<
+	    this.vcf = audioContext.createBiquadFilter();
+	    this.output = audioContext.createGain();
+	
+	    /* --> audioNode connections <-- */
+	    this.vco.connect(this.vcf);
+	    this.vcf.connect(this.output);
+	    this.lfo.connect(this.lfoGain);
+	    // >>> the vcf.frequency param might chcange <<<
+	    this.lfoGain.connect(this.vco.frequency);
+	
+	    /* --> initialize output to no volume & set osc types <-- */
+	    this.output.gain.value = 0;
+	    this.vco.type = this.lfo.type = 'sawtooth';
+	
+	    /* --> start the oscillators <-- */
+	    this.vco.start(audioContext.currentTime);
+	    this.lfo.start(audioContext.currentTime);
+	  }
+	
+	  _createClass(_MonotronConstructor, [{
+	    key: 'noteOn',
+	    value: function noteOn(freq) {
+	      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.audioContext.currentTime;
+	
+	      this.vco.frequency.setValueAtTime(freq, time);
+	      this.output.gain.linearRampToValueAtTime(1.0, time + 0.1);
+	    }
+	  }, {
+	    key: 'noteOff',
+	    value: function noteOff() {
+	      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.audioContext.currentTime;
+	
+	      this.output.gain.linearRampToValueAtTime(0.0, time + 0.1);
+	    }
+	  }, {
+	    key: 'switchLFODest',
+	    value: function switchLFODest(currentSelection) {
+	      this.lfoGain.disconnect();
+	      if (currentSelection === 'Cutoff') {
+	        this.lfoGain.connect(this.vcf.frequency);
+	      } else {
+	        this.lfoGain.connect(this.vco.frequency);
+	      }
+	    }
+	  }, {
+	    key: 'connect',
+	    value: function connect(target) {
+	      this.output.connect(target);
+	    }
+	  }]);
+	
+	  return _MonotronConstructor;
+	}();
+	
+	exports.default = _MonotronConstructor;
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	__webpack_require__(183);
+	
+	var _Knob = __webpack_require__(180);
+	
+	var _Knob2 = _interopRequireDefault(_Knob);
+	
+	var _Switch = __webpack_require__(181);
+	
+	var _Switch2 = _interopRequireDefault(_Switch);
+	
+	var _Keyboard = __webpack_require__(182);
+	
+	var _Keyboard2 = _interopRequireDefault(_Keyboard);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Monotron = function Monotron() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'container text-center' },
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      'MONOTRON'
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'row' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-4' },
+	        _react2.default.createElement(_Switch2.default, { label: 'LFO Dest.', choices: 'Pitch,Cutoff' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-3' },
+	        _react2.default.createElement(_Knob2.default, { label: 'VCO' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-2' },
+	        _react2.default.createElement(_Knob2.default, { label: 'LFO Rate' }),
+	        _react2.default.createElement(_Knob2.default, { label: 'LFO Int' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-3' },
+	        _react2.default.createElement(_Knob2.default, { label: 'VCF Cutoff' }),
+	        _react2.default.createElement(_Knob2.default, { label: 'VCF Peak' })
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_Keyboard2.default, null)
+	    )
+	  );
+	};
+	exports.default = Monotron;
 
 /***/ }
 /******/ ]);

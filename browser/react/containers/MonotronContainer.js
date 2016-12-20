@@ -1,12 +1,13 @@
 import React from 'react';
 
-import Knob from './Knob.js';
-import Switch from './Switch.js';
-import Keyboard from './Keyboard.js';
+import '../../../bin';
+import Knob from '../components/Knob.js';
+import Switch from '../components/Switch.js';
+import Keyboard from '../components/Keyboard.js';
 
 const Monotron = () => {
   return (
-    <div className="container">
+    <div className="container text-center">
 
       <h3>MONOTRON</h3>
 
@@ -30,7 +31,7 @@ const Monotron = () => {
         </div>
       </div>
 
-      <div className="text-center">
+      <div>
         <Keyboard />
       </div>
 
