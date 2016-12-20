@@ -21489,7 +21489,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MonotronContainer = __webpack_require__(185);
+	__webpack_require__(179);
+	
+	var _MonotronContainer = __webpack_require__(180);
 	
 	var _MonotronContainer2 = _interopRequireDefault(_MonotronContainer);
 	
@@ -21501,13 +21503,24 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	/* ---> mount the UI controls <--- */
+	
+	
+	/* ---> react components <--- */
+	
+	
 	var AppContainer = function (_Component) {
 	  _inherits(AppContainer, _Component);
 	
 	  function AppContainer() {
 	    _classCallCheck(this, AppContainer);
 	
-	    return _possibleConstructorReturn(this, (AppContainer.__proto__ || Object.getPrototypeOf(AppContainer)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (AppContainer.__proto__ || Object.getPrototypeOf(AppContainer)).call(this));
+	
+	    _this.state = {
+	      display: 'monotron'
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(AppContainer, [{
@@ -21521,7 +21534,12 @@
 	          { className: 'container text-center' },
 	          _react2.default.createElement(_MonotronContainer2.default, null)
 	        ),
-	        _react2.default.createElement('canvas', { 'data-nx': 'typewriter' })
+	        _react2.default.createElement('hr', null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container text-center' },
+	          _react2.default.createElement('canvas', { 'data-nx': 'typewriter' })
+	        )
 	      );
 	    }
 	  }]);
@@ -21532,8 +21550,87 @@
 	exports.default = AppContainer;
 
 /***/ },
-/* 179 */,
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	__webpack_require__(184);
+
+/***/ },
 /* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Knob = __webpack_require__(181);
+	
+	var _Knob2 = _interopRequireDefault(_Knob);
+	
+	var _Switch = __webpack_require__(182);
+	
+	var _Switch2 = _interopRequireDefault(_Switch);
+	
+	var _Keyboard = __webpack_require__(183);
+	
+	var _Keyboard2 = _interopRequireDefault(_Keyboard);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Monotron = function Monotron() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'container text-center' },
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      'MONOTRON'
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'row' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-4' },
+	        _react2.default.createElement(_Switch2.default, { label: 'LFO Dest.', choices: 'Pitch,Cutoff' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-3' },
+	        _react2.default.createElement(_Knob2.default, { label: 'VCO' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-2' },
+	        _react2.default.createElement(_Knob2.default, { label: 'LFO Rate' }),
+	        _react2.default.createElement(_Knob2.default, { label: 'LFO Int' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-3' },
+	        _react2.default.createElement(_Knob2.default, { label: 'VCF Cutoff' }),
+	        _react2.default.createElement(_Knob2.default, { label: 'VCF Peak' })
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_Keyboard2.default, null)
+	    )
+	  );
+	};
+	exports.default = Monotron;
+
+/***/ },
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21568,7 +21665,7 @@
 	exports.default = Knob;
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21604,7 +21701,7 @@
 	exports.default = Switch;
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21630,7 +21727,7 @@
 	exports.default = Keyboard;
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21639,27 +21736,32 @@
 	  value: true
 	});
 	
-	var _MonotronConstructor2 = __webpack_require__(184);
+	var _MonotronConstructor2 = __webpack_require__(185);
 	
 	var _MonotronConstructor3 = _interopRequireDefault(_MonotronConstructor2);
 	
+	var _keyboardNoteMap = __webpack_require__(186);
+	
+	var _keyboardNoteMap2 = _interopRequireDefault(_keyboardNoteMap);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/* globals nx typewriter1 keyboard1 select1 dial2 dial3 dial4 dial5 */
 	
 	var _audioContext = function _audioContext(options) {
 	  return new AudioContext(options);
-	}; /* globals nx keyboard1 select1 dial2 dial3 dial4 dial5 */
-	
+	};
 	var _createAudioContext = function _createAudioContext(opts) {
 	  return _audioContext(opts);
 	};
 	
 	var _audioNode = _createAudioContext();
-	var _monotron = new _MonotronConstructor3.default(_audioNode);
+	var monotron = new _MonotronConstructor3.default(_audioNode);
 	var _masterGain = _audioNode.createGain();
 	
 	_masterGain.gain.value = 0.7;
 	_masterGain.connect(_audioNode.destination);
-	_monotron.connect(_masterGain);
+	monotron.connect(_masterGain);
 	
 	/* ---> NexusUI Utils <--- */
 	var _midiToFreq = function _midiToFreq(midiNote) {
@@ -21677,24 +21779,33 @@
 	
 	exports.default = nx.onload = function () {
 	
+	  typewriter1.on('*', function (data) {
+	    switch (data.on) {
+	      case 1:
+	        return monotron.noteOn(_keyboardNoteMap2.default[data.key]);
+	      default:
+	        return monotron.noteOff();
+	    }
+	  });
+	
 	  keyboard1.on('*', function (data) {
-	    return keyboard1.clicked ? _monotron.noteOn(_midiToFreq(data.note)) : _monotron.noteOff();
+	    return keyboard1.clicked ? monotron.noteOn(_midiToFreq(data.note)) : monotron.noteOff();
 	  });
 	
 	  select1.on('*', function (data) {
-	    _monotron.switchLFODest(data.text);
+	    monotron.switchLFODest(data.text);
 	  });
 	
 	  // >>> TODO VCO knob <<<
-	  // >>> _dialListenerCreator(dial1, 1, _monotron); <<<
-	  _dialListenerCreator(dial2, 20, _monotron.lfo.frequency);
-	  _dialListenerCreator(dial3, 100, _monotron.lfoGain.gain);
-	  _dialListenerCreator(dial4, 2200, _monotron.vcf.frequency);
-	  _dialListenerCreator(dial5, 100, _monotron.vcf.Q);
+	  // >>> _dialListenerCreator(dial1, 1, monotron); <<<
+	  _dialListenerCreator(dial2, 20, monotron.lfo.frequency);
+	  _dialListenerCreator(dial3, 100, monotron.lfoGain.gain);
+	  _dialListenerCreator(dial4, 2200, monotron.vcf.frequency);
+	  _dialListenerCreator(dial5, 100, monotron.vcf.Q);
 	};
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21774,78 +21885,64 @@
 	exports.default = _MonotronConstructor;
 
 /***/ },
-/* 185 */
-/***/ function(module, exports, __webpack_require__) {
+/* 186 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	__webpack_require__(183);
-	
-	var _Knob = __webpack_require__(180);
-	
-	var _Knob2 = _interopRequireDefault(_Knob);
-	
-	var _Switch = __webpack_require__(181);
-	
-	var _Switch2 = _interopRequireDefault(_Switch);
-	
-	var _Keyboard = __webpack_require__(182);
-	
-	var _Keyboard2 = _interopRequireDefault(_Keyboard);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Monotron = function Monotron() {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'container text-center' },
-	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      'MONOTRON'
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'row' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-4' },
-	        _react2.default.createElement(_Switch2.default, { label: 'LFO Dest.', choices: 'Pitch,Cutoff' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-3' },
-	        _react2.default.createElement(_Knob2.default, { label: 'VCO' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-2' },
-	        _react2.default.createElement(_Knob2.default, { label: 'LFO Rate' }),
-	        _react2.default.createElement(_Knob2.default, { label: 'LFO Int' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-3' },
-	        _react2.default.createElement(_Knob2.default, { label: 'VCF Cutoff' }),
-	        _react2.default.createElement(_Knob2.default, { label: 'VCF Peak' })
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_Keyboard2.default, null)
-	    )
-	  );
+	exports.default = {
+	  '1': 103.826,
+	  '2': 130.813,
+	  '3': 164.814,
+	  '4': 207.652,
+	  '5': 261.626,
+	  '6': 329.628,
+	  '7': 415.305,
+	  '8': 523.251,
+	  '9': 659.255,
+	  '0': 830.609,
+	  '-': 1046.50,
+	  '=': 1318.51,
+	  //>>>><<<<
+	  'q': 87.3071,
+	  'w': 110.000,
+	  'e': 138.591,
+	  'r': 174.614,
+	  't': 220.000,
+	  'y': 277.183,
+	  'u': 349.228,
+	  'i': 440.000,
+	  'o': 554.365,
+	  'p': 698.456,
+	  '[': 880.000,
+	  ']': 1108.73,
+	  //>>>><<<<
+	  'a': 73.4162,
+	  's': 92.4986,
+	  'd': 116.541,
+	  'f': 146.832,
+	  'g': 184.997,
+	  'h': 233.082,
+	  'j': 293.665,
+	  'k': 369.994,
+	  'l': 466.164,
+	  ';': 587.330,
+	  "'": 739.989,
+	  //>>>><<<<
+	  'z': 61.7354,
+	  'x': 77.7817,
+	  'c': 97.9989,
+	  'v': 123.471,
+	  'b': 155.563,
+	  'n': 195.998,
+	  'm': 246.942,
+	  ',': 311.127,
+	  '.': 369.994,
+	  '/': 493.883
 	};
-	exports.default = Monotron;
 
 /***/ }
 /******/ ]);

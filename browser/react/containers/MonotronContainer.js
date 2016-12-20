@@ -1,6 +1,5 @@
 import React from 'react';
 
-import '../../../bin';
 import Knob from '../components/Knob.js';
 import Switch from '../components/Switch.js';
 import Keyboard from '../components/Keyboard.js';
