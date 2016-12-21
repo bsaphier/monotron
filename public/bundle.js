@@ -21491,7 +21491,7 @@
 	
 	__webpack_require__(179);
 	
-	var _MonotronContainer = __webpack_require__(180);
+	var _MonotronContainer = __webpack_require__(183);
 	
 	var _MonotronContainer2 = _interopRequireDefault(_MonotronContainer);
 	
@@ -21529,17 +21529,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container-fluid' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container text-center' },
-	          _react2.default.createElement(_MonotronContainer2.default, null)
-	        ),
-	        _react2.default.createElement('hr', null),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container text-center' },
-	          _react2.default.createElement('canvas', { 'data-nx': 'typewriter' })
-	        )
+	        _react2.default.createElement(_MonotronContainer2.default, null)
 	      );
 	    }
 	  }]);
@@ -21555,7 +21545,7 @@
 
 	'use strict';
 	
-	__webpack_require__(184);
+	__webpack_require__(180);
 
 /***/ },
 /* 180 */
@@ -21567,180 +21557,11 @@
 	  value: true
 	});
 	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Knob = __webpack_require__(181);
-	
-	var _Knob2 = _interopRequireDefault(_Knob);
-	
-	var _Switch = __webpack_require__(182);
-	
-	var _Switch2 = _interopRequireDefault(_Switch);
-	
-	var _Keyboard = __webpack_require__(183);
-	
-	var _Keyboard2 = _interopRequireDefault(_Keyboard);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Monotron = function Monotron() {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'container text-center' },
-	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      'MONOTRON'
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'row' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-4' },
-	        _react2.default.createElement(_Switch2.default, { label: 'LFO Dest.', choices: 'Pitch,Cutoff' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-3' },
-	        _react2.default.createElement(_Knob2.default, { label: 'VCO' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-2' },
-	        _react2.default.createElement(_Knob2.default, { label: 'LFO Rate' }),
-	        _react2.default.createElement(_Knob2.default, { label: 'LFO Int' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-3' },
-	        _react2.default.createElement(_Knob2.default, { label: 'VCF Cutoff' }),
-	        _react2.default.createElement(_Knob2.default, { label: 'VCF Peak' })
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_Keyboard2.default, null)
-	    )
-	  );
-	};
-	exports.default = Monotron;
-
-/***/ },
-/* 181 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Knob = function Knob(props) {
-	  return _react2.default.createElement(
-	    "div",
-	    null,
-	    _react2.default.createElement(
-	      "h5",
-	      null,
-	      props.label
-	    ),
-	    _react2.default.createElement("canvas", { "data-nx": "dial" })
-	  );
-	};
-	
-	Knob.propTypes = {
-	  label: _react.PropTypes.string
-	};
-	
-	exports.default = Knob;
-
-/***/ },
-/* 182 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Switch = function Switch(props) {
-	  return _react2.default.createElement(
-	    "div",
-	    null,
-	    _react2.default.createElement(
-	      "h5",
-	      null,
-	      props.label
-	    ),
-	    _react2.default.createElement("canvas", { "data-nx": "select", "data-choices": props.choices })
-	  );
-	};
-	
-	Switch.propTypes = {
-	  label: _react.PropTypes.string,
-	  choices: _react.PropTypes.string
-	};
-	
-	exports.default = Switch;
-
-/***/ },
-/* 183 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Keyboard = function Keyboard() {
-	  return _react2.default.createElement(
-	    "div",
-	    null,
-	    _react2.default.createElement("canvas", { "data-nx": "keyboard" })
-	  );
-	};
-	
-	exports.default = Keyboard;
-
-/***/ },
-/* 184 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _MonotronConstructor2 = __webpack_require__(185);
+	var _MonotronConstructor2 = __webpack_require__(181);
 	
 	var _MonotronConstructor3 = _interopRequireDefault(_MonotronConstructor2);
 	
-	var _keyboardNoteMap = __webpack_require__(186);
+	var _keyboardNoteMap = __webpack_require__(182);
 	
 	var _keyboardNoteMap2 = _interopRequireDefault(_keyboardNoteMap);
 	
@@ -21805,7 +21626,7 @@
 	};
 
 /***/ },
-/* 185 */
+/* 181 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21885,7 +21706,7 @@
 	exports.default = _MonotronConstructor;
 
 /***/ },
-/* 186 */
+/* 182 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21943,6 +21764,184 @@
 	  '.': 369.994,
 	  '/': 493.883
 	};
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Knob = __webpack_require__(184);
+	
+	var _Knob2 = _interopRequireDefault(_Knob);
+	
+	var _Switch = __webpack_require__(185);
+	
+	var _Switch2 = _interopRequireDefault(_Switch);
+	
+	var _Keyboard = __webpack_require__(186);
+	
+	var _Keyboard2 = _interopRequireDefault(_Keyboard);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Monotron = function Monotron() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'container text-center' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'well well-lg' },
+	      _react2.default.createElement(
+	        'h3',
+	        null,
+	        'MONOTRON'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-4' },
+	          _react2.default.createElement(_Switch2.default, { label: 'LFO Dest.', choices: 'Pitch,Cutoff' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-3' },
+	          _react2.default.createElement(_Knob2.default, { label: 'VCO' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-2' },
+	          _react2.default.createElement(_Knob2.default, { label: 'LFO Rate' }),
+	          _react2.default.createElement(_Knob2.default, { label: 'LFO Int' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-3' },
+	          _react2.default.createElement(_Knob2.default, { label: 'VCF Cutoff' }),
+	          _react2.default.createElement(_Knob2.default, { label: 'VCF Peak' })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-4' },
+	        _react2.default.createElement('canvas', { 'data-nx': 'typewriter' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-4' },
+	        _react2.default.createElement(_Keyboard2.default, null)
+	      )
+	    )
+	  );
+	};
+	exports.default = Monotron;
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Knob = function Knob(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement(
+	      "h5",
+	      null,
+	      props.label
+	    ),
+	    _react2.default.createElement("canvas", { "data-nx": "dial" })
+	  );
+	};
+	
+	Knob.propTypes = {
+	  label: _react.PropTypes.string
+	};
+	
+	exports.default = Knob;
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Switch = function Switch(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement(
+	      "h5",
+	      null,
+	      props.label
+	    ),
+	    _react2.default.createElement("canvas", { "data-nx": "select", "data-choices": props.choices })
+	  );
+	};
+	
+	Switch.propTypes = {
+	  label: _react.PropTypes.string,
+	  choices: _react.PropTypes.string
+	};
+	
+	exports.default = Switch;
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Keyboard = function Keyboard() {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement("canvas", { "data-nx": "keyboard" })
+	  );
+	};
+	
+	exports.default = Keyboard;
 
 /***/ }
 /******/ ]);

@@ -17,13 +17,7 @@ export default class AppContainer extends Component {
   render () {
     return (
       <div className="container-fluid">
-        <div className="container text-center">
-          <MonotronContainer />
-        </div>
-        <hr/>
-        <div className="container text-center">
-          <canvas data-nx="typewriter"></canvas>
-        </div>
+        <MonotronContainer />
       </div>
     );
   }
